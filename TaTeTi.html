@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<HTML>
+	<HEAD>
+		<TITLE></TITLE>
+	</HEAD>
+	<BODY onload="();">
+		<SCRIPT type="text/javascript">
+			
+			function tateti() {
+				var aux_d1, aux_d2, aux_i, aux_j, cantturnos, ficha, ganador, i, j, objetivo, pos, terminado, turnojugador1, valor;
+				// incializa dos matrices de 3x3, una para guardar la ficha que se ve,
+				// y otra para un valor asociado a la ficha, para un jugador sera 1, para
+				// el otro 2, entoces para ver quien gano se multiplica por fila, por
+				// columna y por diagonal, si el resultado es 1 gano el primer jugador,
+				// si es 8 gano el segundo, si es 0 es porque faltaba completar, si
+				// es otra cosa, estan las tres fichas, pero no son del mismo jugador
+				var tab1 = new Array(3); for (var aux_index_0=0; aux_index_0<3; ++aux_index_0) { tab1[aux_index_0] = new Array(3); }
+				var tab2 = new Array(3); for (var aux_index_0=0; aux_index_0<3; ++aux_index_0) { tab2[aux_index_0] = new Array(3); }
+				for (i=1; i<=3; ++i) {
+					for (j=1; j<=3; ++j) {
+						tab1[i-1][j-1] = 0;
+						tab2[i-1][j-1] = " ";
+					}
+				}
+				turnojugador1 = true;
+				terminado = false;
+				ganador = false;
+				cantturnos = 0;
+				while (!terminado) {
+					// dibuja el tablero
+					document.body.innerHTML = '';
+					document.write(" ", '<BR/>');
+					document.write("      ||     ||     ", '<BR/>');
+					document.write("   ", tab2[0][0], "  ||  ", tab2[0][1], "  ||  ", tab2[0][2], '<BR/>');
+					document.write("     1||    2||    3", '<BR/>');
+					document.write(" =====++=====++======", '<BR/>');
+					document.write("      ||     ||     ", '<BR/>');
+					document.write("   ", tab2[1][0], "  ||  ", tab2[1][1], "  ||  ", tab2[1][2], '<BR/>');
+					document.write("     4||    5||    6", '<BR/>');
+					document.write(" =====++=====++======", '<BR/>');
+					document.write("      ||     ||     ", '<BR/>');
+					document.write("   ", tab2[2][0], "  ||  ", tab2[2][1], "  ||  ", tab2[2][2], '<BR/>');
+					document.write("     7||    8||    9", '<BR/>');
+					document.write(" ", '<BR/>');
+					if (!ganador && cantturnos<9) {
+						// carga auxiliares segun a qu� jugador le toca
+						if (turnojugador1) {
+							ficha = "O";
+							valor = 1;
+							objetivo = 1;
+							document.write("Turno del jugador 1 (X)", '<BR/>');
+						} else {
+							ficha = "X";
+							valor = 2;
+							objetivo = 8;
+							document.write("Turno del jugador 2 (O)", '<BR/>');
+						}
+						// pide la posici�n para colocar la ficha y la valida
+						document.write("Ingrese la Posici�n (1-9):", '<BR/>');
+						do {
+							pos = Number(prompt());
+							if (pos<1 || pos>9) {
+								document.write("Posici�n incorrecta, ingrese nuevamente: ", '<BR/>');
+								pos = 99;
+							} else {
+								i = Math.trunc((pos-1)/3)+1;
+								j = ((pos-1)%3)+1;
+								if (tab1[i-1][j-1]!=0) {
+									pos = 99;
+									document.write("Posici�n incorrecta, ingrese nuevamente: ", '<BR/>');
+								}
+							}
+						} while (pos==99);
+						// guarda la ficha en la matriz tab2 y el valor en tab1
+						cantturnos = cantturnos+1;
+						tab1[i-1][j-1] = valor;
+						tab2[i-1][j-1] = ficha;
+						// verifica si gan�, buscando que el producto de las fichas en el tablero de Objetivo
+						aux_d1 = 1;
+						aux_d2 = 1;
+						for (i=1; i<=3; ++i) {
+							aux_i = 1;
+							aux_j = 1;
+							aux_d1 = aux_d1*tab1[i-1][i-1];
+							aux_d2 = aux_d2*tab1[i-1][3-i];
+							for (j=1; j<=3; ++j) {
+								aux_i = aux_i*tab1[i-1][j-1];
+								aux_j = aux_j*tab1[j-1][i-1];
+							}
+							if (aux_i==objetivo || aux_j==objetivo) {
+								ganador = true;
+							}
+						}
+						if (aux_d1==objetivo || aux_d2==objetivo) {
+							ganador = true;
+						} else {
+							turnojugador1 = !turnojugador1;
+						}
+					} else {
+						if (ganador) {
+							document.write("Ganador: ", '<BR/>');
+							if (turnojugador1) {
+								document.write("Jugador 1!", '<BR/>');
+							} else {
+								document.write("Jugador 2!", '<BR/>');
+							}
+						} else {
+							document.write("Empate!", '<BR/>');
+						}
+						terminado = true;
+					}
+				}
+			}
+			
+		</SCRIPT>
+	</BODY>
+</HTML>
