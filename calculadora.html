@@ -1,0 +1,35 @@
+<<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Efrain Llebaria">
+    <title>Ciclos </title>
+</head>
+
+<body>
+    <h1>Calculadora</h1>
+
+    <script>
+        function suma(num1, num2) {
+            var num1, num2;
+            num1 = document.getElementById("valor").value;
+            num2 = document.getElementById("valor2").value;
+            var sumado = parseInt(num1) + parseInt(num2);
+            document.getElementById("resultado").innerHTML = "la suma de " + num1 + " y " + num2 + " es " +
+            sumado;
+        }
+
+        
+        
+    </script>
+
+    Introduce el primer valor
+    <br>
+    <input type="text" id="valor" value="">
+    <br> Introduce el segundo valor
+    <br>
+    <input type="text" id="valor2" value="">
+    <br>
+    <input type="button" value="+" onclick="suma()">
+    <p id="resultado"></p>
+</body>
+
+</html>
