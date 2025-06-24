@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Simple</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__logo">
+                <h1>Mi Sitio</h1>
+            </div>
+            <ul class="nav__menu">
+                <li><a href="#inicio" class="nav__link">Inicio</a></li>
+                <li><a href="#sobre-mi" class="nav__link">Sobre Mí</a></li>
+                <li><a href="#proyectos" class="nav__link">Proyectos</a></li>
+                <li><a href="#contacto" class="nav__link">Contacto</a></li>
+            </ul>
+            <button class="nav__toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="hero__content">
+                <h2 class="hero__title">Bienvenido a Mi Sitio Web</h2>
+                <p class="hero__description">Una página simple creada con HTML, CSS y JavaScript</p>
+                <button class="btn btn--primary" id="cta-button">Comenzar</button>
+            </div>
+        </section>
+
+        <section id="sobre-mi" class="about">
+            <div class="container">
+                <h2 class="section__title">Sobre Mí</h2>
+                <div class="about__content">
+                    <div class="about__text">
+                        <p>Soy un desarrollador apasionado por crear experiencias web increíbles. Me especializo en tecnologías frontend y backend.</p>
+                        <div class="skills">
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Sass</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyectos" class="projects">
+            <div class="container">
+                <h2 class="section__title">Mis Proyectos</h2>
+                <div class="projects__grid" id="projects-grid">
+                    <!-- Los proyectos se cargarán dinámicamente con JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact">
+            <div class="container">
+                <h2 class="section__title">Contacto</h2>
+                <form class="contact__form" id="contact-form">
+                    <div class="form__group">
+                        <input type="text" id="name" name="name" class="form__input" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form__group">
+                        <input type="email" id="email" name="email" class="form__input" placeholder="Tu email" required>
+                    </div>
+                    <div class="form__group">
+                        <textarea id="message" name="message" class="form__textarea" placeholder="Tu mensaje" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Mi Sitio Web. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

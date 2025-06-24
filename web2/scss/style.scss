@@ -1,0 +1,328 @@
+// Variables
+$primary-color: #3498db;
+$secondary-color: #2c3e50;
+$accent-color: #e74c3c;
+$text-color: #333;
+$light-bg: #f8f9fa;
+$white: #ffffff;
+$shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($property: all, $duration: 0.3s) {
+  transition: $property $duration ease;
+}
+
+@mixin button-style($bg-color, $text-color: $white) {
+  background-color: $bg-color;
+  color: $text-color;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  @include transition();
+  
+  &:hover {
+    background-color: darken($bg-color, 10%);
+    transform: translateY(-2px);
+  }
+}
+
+// Reset y estilos base
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: $text-color;
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// Header y navegación
+.header {
+  background-color: $white;
+  box-shadow: $shadow;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.nav {
+  @include flex-center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  
+  &__logo h1 {
+    color: $primary-color;
+    font-size: 1.5rem;
+  }
+  
+  &__menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    
+    @media (max-width: 768px) {
+      position: fixed;
+      top: 70px;
+      left: -100%;
+      width: 100%;
+      height: calc(100vh - 70px);
+      background-color: $white;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 2rem;
+      @include transition(left);
+      
+      &.active {
+        left: 0;
+      }
+    }
+  }
+  
+  &__link {
+    text-decoration: none;
+    color: $text-color;
+    font-weight: 500;
+    @include transition();
+    
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+    span {
+      width: 25px;
+      height: 3px;
+      background-color: $text-color;
+      margin: 3px 0;
+      @include transition();
+    }
+    
+    @media (max-width: 768px) {
+      display: flex;
+    }
+    
+    &.active span {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+  }
+}
+
+// Secciones
+.section__title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: $secondary-color;
+}
+
+// Hero section
+.hero {
+  @include flex-center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  color: $white;
+  text-align: center;
+  
+  &__title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadeInUp 1s ease;
+  }
+  
+  &__description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease 0.2s both;
+  }
+}
+
+// Botones
+.btn {
+  @include button-style($primary-color);
+  animation: fadeInUp 1s ease 0.4s both;
+  
+  &--primary {
+    @include button-style($primary-color);
+  }
+  
+  &--secondary {
+    @include button-style($secondary-color);
+  }
+}
+
+// About section
+.about {
+  padding: 5rem 0;
+  background-color: $light-bg;
+  
+  &__content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  &__text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.skill-tag {
+  background-color: $primary-color;
+  color: $white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+// Projects section
+.projects {
+  padding: 5rem 0;
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+}
+
+.project-card {
+  background-color: $white;
+  border-radius: 10px;
+  box-shadow: $shadow;
+  padding: 2rem;
+  text-align: center;
+  @include transition();
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  &__title {
+    color: $secondary-color;
+    margin-bottom: 1rem;
+  }
+  
+  &__description {
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// Contact section
+.contact {
+  padding: 5rem 0;
+  background-color: $light-bg;
+  
+  &__form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.form__group {
+  margin-bottom: 1.5rem;
+}
+
+.form__input,
+.form__textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  @include transition();
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+  }
+}
+
+.form__textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+// Footer
+.footer {
+  background-color: $secondary-color;
+  color: $white;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+// Animaciones
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .hero__title {
+    font-size: 2rem;
+  }
+  
+  .section__title {
+    font-size: 2rem;
+  }
+  
+  .nav {
+    padding: 1rem;
+  }
+}
